@@ -1,11 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Etch-a-Sketch</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Etch-a-Sketch with Variable Grid Size</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    table {
+      border-collapse: collapse;
+    }
+
+    td {
+      width: 30px;
+      height: 30px;
+      border: 1px solid #ccc;
+    }
+  </style>
 </head>
 <body>
-    <div class="container"></div>
+  <label for="gridSize">Grid Size:</label>
+  <input type="number" id="gridSize" min="1" value="16">
+  <button onclick="createGrid()">Create Grid</button>
+
+  <table id="etchASketch">
+    <!-- The grid will be dynamically created using JavaScript -->
+  </table>
+
+  <script>
+    function createGrid() {
+      const gridSize = parseInt(document.getElementById("gridSize").value);
+      const etchASketch = document.getElementById("etchASketch");
+
+      // Clear existing grid
+      etchASketch.innerHTML = "";
+
+      // Create the grid
+      for (let i = 0; i < gridSize; i++) {
+        const row = etchASketch.insertRow(i);
+        for (let j = 0; j < gridSize; j++) {
+          const cell = row.insertCell(j);
+
+          // Add event listener for drawing on mouseover
+          cell.addEventListener("mouseover", function() {
+            cell.style.backgroundColor = "black";
+          });
+        }
+      }
+    }
+
+    // Initial grid creation
+    createGrid();
+  </script>
 </body>
 </html>
+
